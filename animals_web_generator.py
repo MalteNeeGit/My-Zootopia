@@ -3,7 +3,7 @@ import json
 
 def load_data(file_path):
     """Loads JSON File"""
-    with open(file_path, "r") as handle:
+    with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 #Get the JSON Information about the animals
@@ -28,7 +28,7 @@ def get_animals_information(data):
         output += '<li class="cards__item">'
 
         #Title with the name
-        output += '<div class="cards__title">'
+        output += '<div class="card__title">'
         output += f"{animal['name']}<br/>\n"
         output += '</div>'
 
@@ -74,7 +74,7 @@ new_html = html.replace("__REPLACE_ANIMALS_INFO__", data_of_all_animals)
 
 def write_new_html(file_name, content):
     """Writes a new html-file with the information we got in our Python Project"""
-    with open(file_name, "w") as html_website:
+    with open(file_name, "w", encoding="utf-8") as html_website:
         html_website.write(content)
 
 #Create a new html file. We need to give the new name and the adapted Template
