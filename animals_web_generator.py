@@ -24,17 +24,44 @@ def get_animals_information(data):
     If information is missing, we skip the missing part"""
     output = ""
     for animal in data:
+        #Open new list element for every animal
+        output += '<li class="cards__item">'
+
+        #Title with the name
+        output += '<div class="cards__title">'
+        output += f"{animal['name']}<br/>\n"
+        output += '</div>'
+
+        #Text-element for the datails
+        output += '<p class="card__text">'
+
+        #Check for Diet
         try:
-            #append html information to each string:
-            output += '<li class="cards__item">'
-            output += f"Name: {animal["name"]}<br/>\n"
-            output += f"Diet: {animal["characteristics"]["diet"]}<br/>\n"
-            output += f"Location: {animal["locations"][0]}<br/>\n"
-            output += f"Type: {animal["characteristics"]["type"]}<br/>\n"
-            output += '</li>'
+            if animal['characteristics']['diet']:
+                output += '<strong>Diet:</strong> '
+                output += f"{animal['characteristics']['diet']}<br/>\n"
         except KeyError:
-            output += '</li>'
-            continue
+            pass
+
+        #Check for Location
+        try:
+            if animal['locations'][0]:
+                output += '<strong>Location:</strong> '
+                output += f"{animal['locations'][0]}<br/>\n"
+        except (KeyError, IndexError):
+            pass
+
+        #Check for Type
+        try:
+            if animal['characteristics']['type']:
+                output += '<strong>Type:</strong> '
+                output += f"{animal['characteristics']['type']}<br/>\n"
+        except KeyError:
+            pass
+
+        #Close Text and List element
+        output += '</p>'
+        output += '</li>'
 
     return output
 
