@@ -25,13 +25,15 @@ def get_animals_information(data):
     output = ""
     for animal in data:
         try:
-            output += f"Name: {animal["name"]}\n"
-            output += f"Diet: {animal["characteristics"]["diet"]}\n"
-            output += f"Location: {animal["locations"][0]}\n"
-            output += f"Type: {animal["characteristics"]["type"]}\n"
-            output += "\n"
+            #append html information to each string:
+            output += '<li class="cards__item">'
+            output += f"Name: {animal["name"]}<br/>\n"
+            output += f"Diet: {animal["characteristics"]["diet"]}<br/>\n"
+            output += f"Location: {animal["locations"][0]}<br/>\n"
+            output += f"Type: {animal["characteristics"]["type"]}<br/>\n"
+            output += '</li>'
         except KeyError:
-            output += "\n"
+            output += '</li>'
             continue
 
     return output
