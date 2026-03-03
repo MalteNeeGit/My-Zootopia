@@ -1,10 +1,12 @@
 import json
+from API import fetch_data
 
+#old method for the zootopia tasK
 
-def load_data(file_path):
-    """Loads JSON File"""
-    with open(file_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+#def load_data(file_path):
+    #"""Loads JSON File"""
+    #with open(file_path, "r", encoding="utf-8") as handle:
+        #return json.load(handle)
 
 
 def read_html(html_page):
@@ -62,6 +64,10 @@ def serialize_animal(animal_obj):
 def get_animals_information(data):
     """Loops through the data and serializes all animals"""
     output = ""
+    if not data:
+        return ("<h2>😶‍🌫 This animal does not exist 😶‍🌫️</h2>"
+                "<p>At least in our Database </p>")
+
     for animal_obj in data:
         output += serialize_animal(animal_obj)
     return output
@@ -74,7 +80,9 @@ def write_new_html(file_name, content):
 
 
 def main():
-    animals_data = load_data("animals_data.json")
+    #animals_data = load_data("animals_data.json") #old method for the zootopia task
+    user_input = input("Give me an animal name: ")
+    animals_data = fetch_data(user_input)
     html = read_html("animals_template.html")
     data_of_all_animals = get_animals_information(animals_data)
     new_html = html.replace("__REPLACE_ANIMALS_INFO__", data_of_all_animals)
