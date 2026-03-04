@@ -1,7 +1,13 @@
+from dotenv import load_dotenv
+import os
 import requests
 import json
 
-API_KEY = "H3rYTGX5DBJb9oqzTkDIPtd6HdMwH8l0O0xHKyU2"
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+if API_KEY is None:
+    raise ValueError("API_KEY not found in .env file")
 
 def fetch_data(animal_name):
     """
@@ -31,3 +37,4 @@ def load_data(file_path):
     """Loads JSON File"""
     with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
+
