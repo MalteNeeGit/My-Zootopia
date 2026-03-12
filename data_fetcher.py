@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 import requests
-import json
 
 load_dotenv()
 
@@ -26,15 +25,17 @@ def fetch_data(animal_name):
       }
     },
     """
-    url = f"https://api.api-ninjas.com/v1/animals?x-api-key={API_KEY}&name={animal_name}"
-    res = requests.get(url)
-    data = res.json()
-    return data
+    url = "https://api.api-ninjas.com/v1/animals"
+    params = {"name": animal_name}
+    headers = {"X-Api-Key": API_KEY}
+    try:
+        res = requests.get(url, params=params, headers=headers, timeout=10)
+        res.raise_for_status()
+        data = res.json()
+        return data
+    except requests.exceptions.RequestException as e:
+        print(f"Error handling the Request: {e}")
+        return []
 
-#old method for the zootopia tasK
 
-def load_data(file_path):
-    """Loads JSON File"""
-    with open(file_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
 
