@@ -23,28 +23,22 @@ def serialize_animal(animal_obj):
     output += '<p class="card__text">'
 
     #Check diet
-    try:
-        if animal_obj['characteristics']['diet']:
-            output += '<strong>Diet:</strong> '
-            output += f"{animal_obj['characteristics']['diet']}<br/>\n"
-    except KeyError:
-        pass
+    diet = animal_obj.get('characteristics', {}).get('diet')
+    if diet:
+        output += '<strong>Diet:</strong> '
+        output += f"{diet}<br/>\n"
 
     #Check location
-    try:
-        if animal_obj['locations'][0]:
-            output += '<strong>Location:</strong> '
-            output += f"{animal_obj['locations'][0]}<br/>\n"
-    except (KeyError, IndexError):
-        pass
+    location = animal_obj.get('locations')
+    if location:
+        output += '<strong>Location:</strong> '
+        output += f"{location[0]}<br/>\n"
 
     #Check type
-    try:
-        if animal_obj['characteristics']['type']:
-            output += '<strong>Type:</strong> '
-            output += f"{animal_obj['characteristics']['type']}<br/>\n"
-    except KeyError:
-        pass
+    type_info = animal_obj.get('characteristics', {}).get('type')
+    if type_info:
+        output += '<strong>Type:</strong> '
+        output += f"{type_info}<br/>\n"
 
     #Close text and list element
     output += '</p>'
