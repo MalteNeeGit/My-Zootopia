@@ -9,5 +9,5 @@ Der "Animal Information Generator" ermöglicht es Nutzern, nach einem Tiernamen 
 
 1. **Repository klonen:**
    ```bash
-   git clone <deine-repository-url>
-   cd <projekt-ordner>
+   git clone (https://github.com/MalteNeeGit/My-Zootopia.git)
+   cd My-Zootopia
